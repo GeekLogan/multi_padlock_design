@@ -15,7 +15,7 @@ Modify config.py to specify maximum number of parallel threads for MSA (multiple
 Double click probedesign.py to run
 
 The software allows the following input files:
-1. A text file with a list of gene acronyms. Only works for humand and mouse transcriptomes. One row per gene.
+1. A text file with a list of gene acronyms. Only works for human and mouse transcriptomes. One row per gene.
 2. A csv file with gene acronyms and corresponding linker and barcode sequences. One row per gene. No header in the file.
 3. A text file with target sequences in fasta format.
 
