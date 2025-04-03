@@ -16,7 +16,8 @@ def runmsa(msafile):
     global Processes
     global NextProcess
 
-    msa_process = subprocess.Popen("clustalw2 -quicktree -quiet -infile=" + msafile)
+    #msa_process = subprocess.Popen("clustalw2 -quicktree -quiet -infile=" + msafile)
+    msa_process = subprocess.Popen(["clustalw", "-quicktree", "-quiet", "-infile=" + msafile])
     NextProcess += 1
     Processes.append(msa_process)
 
