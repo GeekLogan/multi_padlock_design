@@ -131,7 +131,7 @@ def getdesigninput():
 
     # loop until all the keyboard inputs are correct
     while not success_s:
-        species = input("Specify the species (human or mouse): ").lower()
+        species = input("Specify the species (human, fly, or mouse): ").lower()
         success_s = checkspecies(species)
 
     # if species in (["human", "mouse"]):
