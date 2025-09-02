@@ -5,9 +5,9 @@ RUN apt upgrade -y
 
 RUN apt install -y wget libgomp1 nano clustalw python3 python3-pip python3-numpy python3-tqdm
 
-RUN wget https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.16.0+-x64-linux.tar.gz
-RUN tar -xvf ncbi-blast-2.16.0+-x64-linux.tar.gz
-RUN echo "export PATH=\$PATH:/ncbi-blast-2.16.0+/bin" >> ~/.bashrc
+RUN wget https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.17.0+-x64-linux.tar.gz
+RUN tar -xvf ncbi-blast-2.17.0+-x64-linux.tar.gz
+RUN echo "export PATH=\$PATH:/ncbi-blast-2.17.0+/bin" >> ~/.bashrc
 
 RUN mkdir /padlock
 COPY examples /padlock/examples
