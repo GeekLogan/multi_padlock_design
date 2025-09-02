@@ -18,9 +18,9 @@ def correctinput(string):
 
 
 def checkspecies(species):
-    """Only human and mouse are currently supported"""
+    """Only human, fly, and mouse are currently supported"""
     success = False
-    if not (species in ["mouse", "human"]):
+    if not (species in ["mouse", "human", "fly"]):
         print("Could not identify species. Try again.")
     else:
         success = True
