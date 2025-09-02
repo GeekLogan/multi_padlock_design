@@ -21,4 +21,8 @@ COPY other_scripts/DownloadFromFTP.py /refseq/download.py
 RUN sh -c "cd /refseq/; python3 download.py"
 RUN sh -c "cd /refseq/; gunzip *.gz"
 
+RUN sh -c "cd /refseq/; wget https://s3ftp.flybase.org/genomes/Drosophila_melanogaster/dmel_r6.64_FB2025_03/fasta/dmel-all-transcript-r6.64.fasta.gz"
+RUN sh -c "cd /refseq/; gunzip dmel-all-transcript-r6.64.fasta.gz"
+RUN sh -c "cd /refseq/; mv dmel-all-transcript-r6.64.fasta fly.1.rna.fna"
+
 WORKDIR /padlock/
