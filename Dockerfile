@@ -3,7 +3,7 @@ FROM ubuntu:24.04
 RUN apt update -y
 RUN apt upgrade -y
 
-RUN apt install -y wget libgomp1 nano clustalw python3 python3-pip python3-numpy python3-tqdm
+RUN apt install -y wget libgomp1 nano clustalw python3 python3-pip python3-numpy python3-tqdm python3-is-python
 
 RUN wget https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.17.0+-x64-linux.tar.gz
 RUN tar -xvf ncbi-blast-2.17.0+-x64-linux.tar.gz
