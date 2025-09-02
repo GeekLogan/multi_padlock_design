@@ -37,13 +37,14 @@ def fastadb(indir, filenum, filename, name):
             print(digit)
 
             for line in f:
-                line = line.rstrip("\n")
-                if line[0] == ">":  # a new sequence
-                    Seq.append([seq])
-                    Headers.append(line)
-                    seq = str()
-                else:
-                    seq += line
+                line = line.strip()
+                if line:
+                    if line[0] == ">":  # a new sequence
+                        Seq.append([seq])
+                        Headers.append(line)
+                        seq = str()
+                    else:
+                        seq += line
 
     Seq.append(seq)  # the last sequence
     del Seq[0]  # delete first empty element due to appending only
