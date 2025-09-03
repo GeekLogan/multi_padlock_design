@@ -11,7 +11,7 @@ fasta_pre_suffix_mouose = ('mouse.', '.rna.fna')
 
 # human database
 fastadir_human = '/refseq/'
-fasta_filenum_human = 16
+fasta_filenum_human = 15
 fasta_pre_suffix_human = ('human.', '.rna.fna')
 
 # fly database

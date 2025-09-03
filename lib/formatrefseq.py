@@ -42,45 +42,58 @@ def fastadb(indir, filenum, filename, name):
                 f.write("%s\n" % gene)
                 fs.write("%s\n" % Seq[c][0])
 
-    # retain only NM and NR entries
-    for c in range(len(Headers) - 1, -1, -1):
-        if "|" in Headers[c]:
-            header = Headers[c].split("|")
-            if len(header) <= 3:
-                if not (
-                    header[1][:2] == "NM" or header[1][:2] == "NR"
-                ):  # new NCBI fna format
-                    del Headers[c]
-                    del Seq[c]
+    if 'fly' not in filename[0]:  # fly database already filtered
+        # retain only NM and NR entries
+        for c in range(len(Headers) - 1, -1, -1):
+            if "|" in Headers[c]:
+                header = Headers[c].split("|")
+                if len(header) <= 3:
+                    if not (
+                        header[1][:2] == "NM" or header[1][:2] == "NR"
+                    ):  # new NCBI fna format
+                        del Headers[c]
+                        del Seq[c]
+                else:
+                    if not (
+                        header[3][:2] == "NM" or header[3][:2] == "NR"
+                    ):  # old NCBI fna format
+                        del Headers[c]
+                        del Seq[c]
             else:
                 if not (
-                    header[3][:2] == "NM" or header[3][:2] == "NR"
-                ):  # old NCBI fna format
+                    Headers[c][1:3] == "NM" or Headers[c][1:3] == "NR"
+                ):  # new NCBI single fasta file format
                     del Headers[c]
                     del Seq[c]
-        else:
-            if not (
-                Headers[c][1:3] == "NM" or Headers[c][1:3] == "NR"
-            ):  # new NCBI single fasta file format
-                del Headers[c]
-                del Seq[c]
 
     # write selected sequences to file
     with open(os.path.join(indir, name + ".selectedheaders.txt"), "w") as f:
         with open(os.path.join(indir, name + ".selectedseqs.txt"), "w") as fs:
             for c, gene in enumerate(Headers):
-                f.write("%s\n" % gene)
-                fs.write("%s\n" % Seq[c][0])
+                if 'fly' in filename[0]:
+                    genename = gene.split(" name=")[1].split(";")[0]
+                    genename = genename.split('-')[0]  # remove -RA, -RB etc.
+                    f.write(f"{gene.split()[0] + '_' + genename}\n")
+                    fs.write(f"{Seq[c][0]}\n")
+                else:
+                    f.write(f"{gene}\n")
+                    fs.write(f"{Seq[c][0]}\n")
 
     # acronyms only
     HeadersAcronym = []
-    for header in Headers:
-        par1 = header.split("(")
-        par2 = header.split(")")
-        if len(par1) == 2:
-            HeadersAcronym.append(par2[0][len(par1[0]) - len(par2[0]) + 1 :])
-        else:
-            HeadersAcronym.append(par2[-2][-len(par1[-1]) + len(par2[-1]) + 1 :])
+    if 'fly' in filename[0]:  # fly database
+        for header in Headers:
+            genename = header.split(" name=")[1].split(";")[0]
+            genename = genename.split('-')[0]  # remove -RA, -RB etc.
+            HeadersAcronym.append(genename)
+    else:
+        for header in Headers:
+            par1 = header.split("(")
+            par2 = header.split(")")
+            if len(par1) == 2:
+                HeadersAcronym.append(par2[0][len(par1[0]) - len(par2[0]) + 1 :])
+            else:
+                HeadersAcronym.append(par2[-2][-len(par1[-1]) + len(par2[-1]) + 1 :])
 
     # write acronyms to file
     with open(os.path.join(indir, name + ".acronymheaders.txt"), "w") as f:

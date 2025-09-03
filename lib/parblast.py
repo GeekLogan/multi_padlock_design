@@ -21,7 +21,7 @@ def newblast():
     global Processes
     global NextProcess
     global fname
-    fastadir = (config.fastadir_mouse, config.fastadir_human)
+    fastadir = (config.fastadir_mouse, config.fastadir_human, config.fastadir_fly)
 
     if NextProcess < len(sites):
         blastf = fname + "_" + str(NextProcess + 1) + ".fasta"
@@ -38,7 +38,7 @@ def newblast():
                     '"'
                     + os.path.join(
                         fastadir[species],
-                        ("mouse", "human")[species] + ".transcriptome" + '"',
+                        ("mouse", "human", 'fly')[species] + ".transcriptome" + '"',
                     ),
                     "-outfmt 10",
                     "-out ",
@@ -79,6 +79,8 @@ def continueblast(listSiteChopped, headers, dirname, designpars):
         species = 0
     elif designpars[0] == "human":
         species = 1
+    elif designpars[0] == "fly":
+        species = 2
 
     print("Starting blast..")
     for i, sites in enumerate(listSiteChopped):
