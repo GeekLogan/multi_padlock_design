@@ -20,14 +20,16 @@ def loaddb(species):
     global Headers
     global Seq
 
-    fastadir = (config.fastadir_mouse, config.fastadir_human)
-    fasta_filenum = (config.fasta_filenum_mouse, config.fasta_filenum_human)
-    fasta_pre_suffix = (config.fasta_pre_suffix_mouose, config.fasta_pre_suffix_human)
+    fastadir = (config.fastadir_mouse, config.fastadir_human, config.fastadir_fly)
+    fasta_filenum = (config.fasta_filenum_mouse, config.fasta_filenum_human, config.fasta_filenum_fly)
+    fasta_pre_suffix = (config.fasta_pre_suffix_mouose, config.fasta_pre_suffix_human, config.fasta_pre_suffix_fly)
 
     if species == "mouse":
         s = 0
     elif species == "human":
         s = 1
+    elif species == "fly":
+        s = 2
 
     # try:
     # create trascriptome database if not existing
