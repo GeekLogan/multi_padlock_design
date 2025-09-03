@@ -71,7 +71,7 @@ def fastadb(indir, filenum, filename, name):
         with open(os.path.join(indir, name + ".selectedseqs.txt"), "w") as fs:
             for c, gene in enumerate(Headers):
                 if 'fly' in filename[0]:
-                    genename = gene.split(" name=")[1].split(";")[0]
+                    genename = gene.split(" parent=")[1].split(";")[0]
                     genename = genename.split('-')[0]  # remove -RA, -RB etc.
                     f.write(f"{gene.split()[0] + '_' + genename}\n")
                     fs.write(f"{Seq[c][0]}\n")
@@ -83,7 +83,7 @@ def fastadb(indir, filenum, filename, name):
     HeadersAcronym = []
     if 'fly' in filename[0]:  # fly database
         for header in Headers:
-            genename = header.split(" name=")[1].split(";")[0]
+            genename = header.split(" parent=")[1].split(";")[0]
             genename = genename.split('-')[0]  # remove -RA, -RB etc.
             HeadersAcronym.append(genename)
     else:
