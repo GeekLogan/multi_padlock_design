@@ -72,7 +72,7 @@ def fastadb(indir, filenum, filename, name):
             for c, gene in enumerate(Headers):
                 if 'fly' in filename[0]:
                     genename = gene.split(" parent=")[1].split(";")[0]
-                    f.write(f"{gene.split()[0] + '_' + genename}\n")
+                    f.write(f"{gene.split()[0]}\n")
                     fs.write(f"{Seq[c][0]}\n")
                 else:
                     f.write(f"{gene}\n")
